@@ -1,0 +1,37 @@
+# loading the required packages
+library(ggplot2)
+library(ggmap)
+
+# creating a sample data.frame with your lat/lon points
+# Input longitude and latitute for Campbell River, BC, Canada
+lon <- c(-125.274135)
+lat <- c(50.046545)
+
+ 
+
+# Create dataframe from lon and lat
+df <- as.data.frame(cbind(lon,lat))
+
+# get the map
+CR <- get_map(location = c(lon = mean(df$lon), lat = mean(df$lat)), zoom = 3,
+                      maptype = "satellite", scale = 2)
+
+# plot map with points 
+# CR in relation to North America 
+
+ggmap(CR) +
+  geom_point(data = df, aes(x = lon, y = lat, fill = "red", alpha = 0.8), size = 4, shape = 21) +
+  guides(fill=FALSE, alpha=FALSE, size=FALSE)
+
+# Using qmap
+library(ggplot2)
+library(ggmap)
+# Find  and map Geoobject
+# Regional view of Campbell River
+
+CR <- ("Campbell River")
+qmap(CR, zoom=7)
+
+# Closer View
+CR <- ("Campbell River")
+qmap(CR, zoom=9)
